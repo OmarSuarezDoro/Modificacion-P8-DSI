@@ -65,10 +65,10 @@ describe('Tests de la clase Observable', () => {
     expect(observable.observers[1]).to.be.eql(observer2);
   })
 
-  it ('Must throw an error if the observer is already in the list', () => {
+  it ('Must throw an error if the observer is already an observer', () => {
     observable.subscribe(observer1);
     expect(observable.observers[0]).to.be.eql(observer1);
-    expect(observable.subscribe(observer1)).to.throw('The element is already an Observer');    
+    expect(() => observable.subscribe(observer1)).to.throw('The element is already an Observer');    
   })
 
   it ('Must unsuscribe observers to an observable', () => {
@@ -82,7 +82,7 @@ describe('Tests de la clase Observable', () => {
   it ('Must throw an error if the observer is not in the list', () => {
     observable.subscribe(observer1);
     expect(observable.observers[0]).to.be.eql(observer1);    
-    expect(observable.unsubscribe(observer2)).to.throw('The element is already an Observer');
+    expect(() => observable.unsubscribe(observer2)).to.throw('The element is not in the list of suscribed observers');    
   })
 
   it ('Must update the state of observers', () => {
